@@ -17,11 +17,11 @@ const fadeUp = {
 const stagger = { visible: { transition: { staggerChildren: 0.07 } } };
 
 const projects = [
-  // DEVOPS
+  // ── DEVOPS ──
   {
     title: 'AKS E-Commerce Platform',
-    description: 'Production-grade e-commerce platform on Azure Kubernetes Service with multi-container architecture, Helm charts, and full CI/CD via Azure DevOps. Praised by mentor as a reference project for other engineers.',
-    github: 'https://github.com/amna-hashim-tech/aks-ecommerce-platform',
+    description: 'Production-grade e-commerce platform on Azure Kubernetes Service with multi-container architecture, Helm charts, and full CI/CD via Azure DevOps.',
+    github: 'https://github.com/amna-hashim-tech/ecommerce-devops-project',
     tech: ['Kubernetes', 'AKS', 'Docker', 'Helm', 'Azure DevOps', 'CI/CD'],
     category: 'DevOps',
     icon: Container,
@@ -30,28 +30,52 @@ const projects = [
   {
     title: 'Terraform Secure Multi-Tier Web App',
     description: 'Infrastructure-as-Code project provisioning a secure multi-tier Azure environment using Terraform modules, remote state, workspaces, and for_each loops.',
-    github: 'https://github.com/amna-hashim-tech/terraform-secure-web-app',
+    github: 'https://github.com/amna-hashim-tech/azure-terraform-enterprise',
     tech: ['Terraform', 'Azure', 'IaC', 'Remote State', 'Modules'],
     category: 'DevOps',
     icon: Shield,
   },
   {
-    title: 'Jenkins CI/CD Pipeline Demo',
-    description: 'End-to-end CI/CD pipeline on DigitalOcean with Jenkins, featuring automated build, test, and deployment stages with GitHub webhook triggers.',
-    github: 'https://github.com/amna-hashim-tech/jenkins-cicd-demo',
+    title: 'Jenkins CI/CD Pipeline',
+    description: 'End-to-end CI/CD pipeline built with Jenkins on DigitalOcean, featuring automated build, test, and deployment stages with GitHub webhook integration.',
+    github: 'https://github.com/amna-hashim-tech/jenkins-demo-website',
     tech: ['Jenkins', 'CI/CD', 'DigitalOcean', 'Docker', 'GitHub Webhooks'],
     category: 'DevOps',
     icon: GitBranch,
   },
   {
-    title: 'E-Commerce Status Dashboard',
-    description: 'Real-time service health dashboard monitoring API uptime, database health, and infrastructure metrics across a multi-service e-commerce platform on Azure.',
-    github: 'https://github.com/amna-hashim-tech/ecommerce-status-dashboard',
-    tech: ['Azure', 'Node.js', 'Monitoring', 'REST APIs', 'DevOps'],
+    title: 'Simple CI/CD Pipeline Demo',
+    description: 'Lightweight CI/CD pipeline demonstrating GitHub Actions workflow for automated build, test, and deployment to Azure.',
+    github: 'https://github.com/amna-hashim-tech/simple-pipeline-demo',
+    tech: ['GitHub Actions', 'CI/CD', 'Azure', 'YAML'],
+    category: 'DevOps',
+    icon: GitBranch,
+  },
+  {
+    title: 'DevOps Health Monitor API',
+    description: 'REST API for monitoring DevOps pipeline health, tracking build statuses, deployment metrics, and infrastructure uptime across environments.',
+    github: 'https://github.com/amna-hashim-tech/devops-health-api',
+    tech: ['Node.js', 'REST API', 'Azure', 'Monitoring', 'DevOps'],
     category: 'DevOps',
     icon: BarChart3,
   },
-  // AI
+  {
+    title: 'Microservices Demo',
+    description: 'Containerised microservices architecture demo with Docker Compose, service discovery, and inter-service communication on Azure.',
+    github: 'https://github.com/amna-hashim-tech/microservices-demo',
+    tech: ['Docker', 'Microservices', 'Azure', 'Node.js'],
+    category: 'DevOps',
+    icon: Layers,
+  },
+  {
+    title: 'Terraform CI Pipeline',
+    description: 'Automated Terraform CI pipeline that validates, plans, and applies infrastructure changes on Azure through GitHub Actions.',
+    github: 'https://github.com/amna-hashim-tech/TerraformCI',
+    tech: ['Terraform', 'CI/CD', 'GitHub Actions', 'Azure', 'IaC'],
+    category: 'DevOps',
+    icon: Shield,
+  },
+  // ── AI ──
   {
     title: 'Smart Infrastructure Advisor',
     description: 'AI-powered infrastructure recommendation engine built with FastAPI and the Claude API. Analyses cloud workloads and suggests optimal Azure architecture. Deployed live on Vercel.',
@@ -63,8 +87,32 @@ const projects = [
     highlight: true,
   },
   {
+    title: 'AI Incident Response System',
+    description: 'Automated incident detection and response system using Azure OpenAI to classify alerts, suggest remediation steps, and escalate critical issues.',
+    github: 'https://github.com/amna-hashim-tech/ai-incident-response',
+    tech: ['Azure OpenAI', 'Python', 'AI Automation', 'Azure Monitor'],
+    category: 'AI',
+    icon: Activity,
+  },
+  {
+    title: 'AI Trend Predictor',
+    description: 'Machine learning tool that analyses cloud infrastructure metrics and predicts usage trends, capacity needs, and potential bottlenecks.',
+    github: 'https://github.com/amna-hashim-tech/AI-Trend-Predictor',
+    tech: ['Python', 'Azure ML', 'Forecasting', 'Data Analysis'],
+    category: 'AI',
+    icon: BarChart3,
+  },
+  {
+    title: 'AI Model Tracker – 3D Globe',
+    description: 'Interactive 3D globe visualising AI model deployments and performance metrics across global Azure regions.',
+    github: 'https://github.com/amna-hashim-tech/ai-model-tracker',
+    tech: ['React', 'Globe.gl', 'Azure', 'Data Visualization'],
+    category: 'AI',
+    icon: Brain,
+  },
+  {
     title: 'Real-Time Azure Infrastructure Monitor',
-    description: 'Live monitoring dashboard built with Streamlit visualising Azure resource metrics, alerts, and health using Azure Monitor APIs.',
+    description: 'Live monitoring dashboard built with Streamlit visualising Azure resource metrics, alerts, and infrastructure health using Azure Monitor APIs.',
     github: 'https://github.com/amna-hashim-tech/azure-infrastructure-monitor',
     tech: ['Streamlit', 'Python', 'Azure Monitor', 'Azure SDK'],
     category: 'AI',
@@ -73,7 +121,7 @@ const projects = [
   {
     title: 'AI Customer Support Chatbot',
     description: 'Context-aware customer support chatbot powered by Azure OpenAI with Node.js backend, conversation history, and intelligent escalation logic.',
-    github: 'https://github.com/amna-hashim-tech/ai-customer-support-chatbot',
+    github: 'https://github.com/amna-hashim-tech/ai-chatbot-azure',
     tech: ['Azure OpenAI', 'Node.js', 'AI', 'REST API'],
     category: 'AI',
     icon: MessageSquare,
@@ -86,7 +134,15 @@ const projects = [
     category: 'AI',
     icon: Mail,
   },
-  // CLOUD
+  {
+    title: 'AZ-Commits – AI Commit Generator',
+    description: 'Azure-powered CLI tool that uses Azure OpenAI to automatically generate meaningful Git commit messages from staged changes.',
+    github: 'https://github.com/amna-hashim-tech/az-commits',
+    tech: ['Azure OpenAI', 'Node.js', 'CLI', 'TypeScript'],
+    category: 'AI',
+    icon: GitBranch,
+  },
+  // ── CLOUD ──
   {
     title: 'TechGear Plus – Azure Migration',
     description: 'Full migration of a production e-commerce store to Azure infrastructure with optimised CI/CD pipelines, load balancing, and zero-downtime deployment.',
@@ -100,6 +156,14 @@ const projects = [
     description: 'Full-stack cloud resume with Azure Static Web Apps, serverless API via Azure Functions, Cosmos DB visitor counter, and GitHub Actions CI/CD.',
     github: 'https://github.com/amna-hashim-tech/cloud-resume-azure',
     tech: ['Azure', 'Serverless', 'Cosmos DB', 'GitHub Actions'],
+    category: 'Cloud',
+    icon: Server,
+  },
+  {
+    title: 'Azure Networking Project',
+    description: 'Hands-on Azure networking lab covering VNets, NSGs, VNet peering, load balancers, and DNS configuration for enterprise-grade connectivity.',
+    github: 'https://github.com/amna-hashim-tech/azure-networking-project',
+    tech: ['Azure VNet', 'NSG', 'VNet Peering', 'Load Balancer', 'DNS'],
     category: 'Cloud',
     icon: Server,
   },
@@ -136,13 +200,6 @@ const skills = [
     border: 'border-violet-500/20',
     items: ['Claude API', 'Azure OpenAI', 'FastAPI', 'Streamlit', 'Cognitive Services', 'AI Chatbots'],
   },
-  {
-    name: 'Development',
-    icon: Code2,
-    color: 'from-amber-500/15 to-orange-500/5',
-    border: 'border-amber-500/20',
-    items: ['Python', 'Node.js', 'React', 'JavaScript', 'Flask', 'REST APIs', 'Tailwind CSS'],
-  },
 ];
 
 const certs = [
@@ -158,7 +215,7 @@ export default function Portfolio() {
   const filteredProjects = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter);
 
   const handleEmail = () => { window.location.href = 'mailto:amnahashim.contact@gmail.com'; };
-  const handleCV = () => { window.location.href = 'mailto:amnahashim.contact@gmail.com?subject=CV Request - Amna Hashim'; };
+  const handleCV = () => { window.open('https://drive.google.com/file/d/1ArLln7Lrnzsdyxap05zovsFEO7d-tfR0/view?usp=drive_link', '_blank'); };
 
   return (
     <div className="min-h-screen bg-[#070b12] text-slate-100" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
@@ -284,7 +341,7 @@ export default function Portfolio() {
               <h2 className="text-3xl sm:text-4xl font-bold text-white">Technical Skills</h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {skills.map((skill, i) => {
                 const Icon = skill.icon;
                 return (
