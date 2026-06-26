@@ -1,29 +1,12 @@
 import { useState } from "react";
 
-const COLORS = {
-  bg: "#F8F9FB",
-  surface: "#FFFFFF",
-  border: "#E4E7ED",
-  borderStrong: "#C9CDD6",
-  text: "#0F1117",
-  textSecondary: "#4B5260",
-  textMuted: "#8892A0",
-  accent: "#1A56DB",
-  accentLight: "#EBF0FF",
-  accentMid: "#3B6FE8",
-  success: "#0E7A4A",
-  successLight: "#E6F5EE",
-  tag: "#F1F3F7",
-  tagText: "#3D4452",
-};
-
 const projects = [
   {
     id: "cloudbite",
     title: "CloudBite",
     subtitle: "Enterprise AKS Platform",
     description:
-      "Multi-repo cloud-native food ordering platform built for production. Four independently managed services covering the application layer, CI/CD pipelines, Terraform infrastructure, and Helm chart deployments — with Trivy security scanning, SonarQube code quality gates, and Prometheus/Grafana monitoring baked in.",
+      "Multi-repo cloud-native food ordering platform built for production. Four independently managed services covering the application layer, CI/CD pipelines, Terraform infrastructure, and Helm chart deployments with Trivy security scanning, SonarQube code quality gates, and Prometheus/Grafana monitoring baked in.",
     tags: ["Kubernetes", "AKS", "Terraform", "ArgoCD", "Helm", "SonarQube", "Trivy", "Prometheus", "Grafana", "GitOps"],
     category: "DevOps",
     flagship: true,
@@ -51,7 +34,7 @@ const projects = [
     title: "Terraform Enterprise Infrastructure",
     subtitle: "Multi-Environment Azure IaC",
     description:
-      "Multi-environment Azure infrastructure provisioned with Terraform — separate dev, staging, and production workspaces with remote state, load balancing, VMs, and Azure Monitor integration.",
+      "Multi-environment Azure infrastructure provisioned with Terraform with separate dev, staging, and production workspaces, remote state, load balancing, VMs, and Azure Monitor integration.",
     tags: ["Terraform", "Azure", "IaC", "Remote State", "Load Balancing", "Monitoring"],
     category: "DevOps",
     flagship: false,
@@ -62,7 +45,7 @@ const projects = [
     title: "Python CI/CD Pipeline",
     subtitle: "GitHub Actions Automation",
     description:
-      "End-to-end CI/CD pipeline for a Python application — automated testing, linting, build, and deployment stages orchestrated through GitHub Actions with environment-specific gates.",
+      "End-to-end CI/CD pipeline for a Python application with automated testing, linting, build, and deployment stages orchestrated through GitHub Actions with environment-specific gates.",
     tags: ["Python", "GitHub Actions", "CI/CD", "Azure", "Testing"],
     category: "DevOps",
     flagship: false,
@@ -73,8 +56,8 @@ const projects = [
     title: "AI Incident Response System",
     subtitle: "Automated Alert Triage",
     description:
-      "Azure OpenAI-powered system that classifies infrastructure alerts, suggests remediation steps, and escalates critical incidents automatically — reducing mean time to response.",
-    tags: ["Azure OpenAI", "Python", "AI Automation", "Azure Monitor", "HCL"],
+      "Azure OpenAI powered system that classifies infrastructure alerts, suggests remediation steps, and escalates critical incidents automatically to reduce mean time to response.",
+    tags: ["Azure OpenAI", "Python", "AI Automation", "Azure Monitor"],
     category: "DevOps",
     flagship: false,
     repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/ai-incident-response" }],
@@ -107,7 +90,7 @@ const projects = [
     title: "Azure Infrastructure Monitor",
     subtitle: "Real-Time Cloud Health Dashboard",
     description:
-      "Streamlit dashboard pulling live Azure Monitor metrics to surface resource health, anomaly detection alerts, and cost tracking — built with Python and the Azure SDK.",
+      "Streamlit dashboard pulling live Azure Monitor metrics to surface resource health, anomaly detection alerts, and cost tracking built with Python and the Azure SDK.",
     tags: ["Streamlit", "Python", "Azure Monitor", "Azure SDK", "Anomaly Detection"],
     category: "AI",
     flagship: false,
@@ -137,10 +120,10 @@ const projects = [
   },
   {
     id: "az-commits",
-    title: "AZ-Commits",
+    title: "AZ Commits",
     subtitle: "AI Git Commit Generator",
     description:
-      "CLI tool powered by Azure OpenAI that reads staged git changes and generates meaningful, conventional commit messages — cutting the time spent writing commit history.",
+      "CLI tool powered by Azure OpenAI that reads staged git changes and generates meaningful conventional commit messages to cut the time spent writing commit history.",
     tags: ["Azure OpenAI", "Node.js", "CLI", "TypeScript", "Developer Tools"],
     category: "AI",
     flagship: false,
@@ -151,7 +134,7 @@ const projects = [
     title: "Smart Email Reply Assistant",
     subtitle: "AI-Powered Email Drafting",
     description:
-      "Flask application using Azure OpenAI to generate contextual email replies in seconds — trained on professional tone and format for business communication.",
+      "Flask application using Azure OpenAI to generate contextual email replies in seconds with professional tone and format for business communication.",
     tags: ["Azure OpenAI", "Flask", "Python", "AI Automation"],
     category: "AI",
     flagship: false,
@@ -162,7 +145,7 @@ const projects = [
     title: "Smart Document Analyzer",
     subtitle: "AI Document Intelligence",
     description:
-      "AI-powered tool that extracts key information, summarises content, and answers questions from uploaded documents using Azure AI services.",
+      "AI powered tool that extracts key information, summarises content, and answers questions from uploaded documents using Azure AI services.",
     tags: ["Azure AI", "JavaScript", "Document Intelligence", "AI"],
     category: "AI",
     flagship: false,
@@ -173,7 +156,7 @@ const projects = [
     title: "TechGear Plus Azure Migration",
     subtitle: "Zero-Downtime Cloud Migration",
     description:
-      "Full migration of a production e-commerce store to Azure — redesigned CI/CD pipelines, load balancing across availability zones, and a zero-downtime blue/green cutover.",
+      "Full migration of a production e-commerce store to Azure with redesigned CI/CD pipelines, load balancing across availability zones, and a zero-downtime blue/green cutover.",
     tags: ["Azure", "DevOps", "CI/CD", "Load Balancing", "Migration", "eCommerce"],
     category: "Cloud",
     flagship: false,
@@ -184,22 +167,10 @@ const projects = [
 const CATEGORIES = ["All", "DevOps", "AI", "Cloud"];
 
 const skills = [
-  {
-    area: "DevOps & CI/CD",
-    items: ["Azure DevOps", "GitHub Actions", "Jenkins", "ArgoCD", "GitOps", "Docker", "Helm", "Trivy", "SonarQube"],
-  },
-  {
-    area: "Cloud & IaC",
-    items: ["Azure (AKS, Functions, App Service, Monitor, OpenAI)", "Kubernetes", "Terraform", "Remote State", "Workspaces"],
-  },
-  {
-    area: "AI & Automation",
-    items: ["Azure OpenAI", "Claude API", "FastAPI", "Streamlit", "Multi-Agent Systems", "Python"],
-  },
-  {
-    area: "E-Commerce & Web Ops",
-    items: ["WooCommerce", "Shopify", "WordPress", "GA4", "GTM", "Elementor"],
-  },
+  { area: "DevOps & CI/CD", items: ["Azure DevOps", "GitHub Actions", "Jenkins", "ArgoCD", "GitOps", "Docker", "Helm", "Trivy", "SonarQube"] },
+  { area: "Cloud & IaC", items: ["Azure AKS", "Azure Functions", "App Service", "Azure Monitor", "Kubernetes", "Terraform", "Remote State"] },
+  { area: "AI & Automation", items: ["Azure OpenAI", "Claude API", "FastAPI", "Streamlit", "Multi-Agent Systems", "Python"] },
+  { area: "E-Commerce & Web Ops", items: ["WooCommerce", "Shopify", "WordPress", "GA4", "GTM", "Elementor"] },
 ];
 
 const certs = [
@@ -220,130 +191,175 @@ export default function Portfolio() {
   };
 
   return (
-    <div style={{ background: "#F8F9FB", color: "#0F1117", fontFamily: "'Inter', system-ui, sans-serif", minHeight: "100vh" }}>
+    <div style={{ background: "#ffffff", color: "#111827", fontFamily: "'Inter', system-ui, sans-serif", minHeight: "100vh" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         a { color: inherit; text-decoration: none; }
-        button { cursor: pointer; border: none; background: none; font-family: inherit; }
-        .nav-link { font-size: 14px; font-weight: 500; color: #4B5260; transition: color 0.15s; padding: 6px 0; }
-        .nav-link:hover { color: #0F1117; }
-        .filter-btn { padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 500; border: 1px solid #E4E7ED; color: #4B5260; background: #FFFFFF; transition: all 0.15s; cursor: pointer; font-family: inherit; }
-        .filter-btn:hover { border-color: #1A56DB; color: #1A56DB; }
-        .filter-btn.active { background: #1A56DB; color: #fff; border-color: #1A56DB; }
-        .card { background: #FFFFFF; border: 1px solid #E4E7ED; border-radius: 12px; padding: 28px; transition: box-shadow 0.2s, border-color 0.2s; display: flex; flex-direction: column; gap: 14px; }
-        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-color: #C9CDD6; }
-        .card.flagship { border-color: #1A56DB; border-width: 1.5px; }
-        .tag { display: inline-block; background: #F1F3F7; color: #3D4452; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 4px; }
-        .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; border: 1px solid #E4E7ED; color: #4B5260; background: #FFFFFF; }
-        .btn-primary { display: inline-flex; align-items: center; background: #1A56DB; color: #fff; font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 8px; transition: background 0.15s; gap: 8px; }
-        .btn-primary:hover { background: #3B6FE8; }
-        .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; color: #0F1117; font-size: 14px; font-weight: 600; padding: 10px 22px; border-radius: 8px; border: 1px solid #E4E7ED; transition: border-color 0.15s; }
-        .btn-secondary:hover { border-color: #C9CDD6; }
-        .repo-link { font-size: 12px; font-weight: 500; color: #1A56DB; border: 1px solid #EBF0FF; background: #EBF0FF; padding: 4px 10px; border-radius: 5px; transition: background 0.15s; }
-        .repo-link:hover { background: #dce8ff; }
-        .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1A56DB; font-family: 'JetBrains Mono', monospace; }
-        .divider { height: 1px; background: #E4E7ED; }
-        .skill-card { background: #FFFFFF; border: 1px solid #E4E7ED; border-radius: 10px; padding: 22px 24px; }
-        @media (max-width: 768px) {
-          .hero-inner { flex-direction: column !important; }
-          .projects-grid { grid-template-columns: 1fr !important; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+
+        .nav-link {
+          font-size: 14px; font-weight: 500; color: #6b7280;
+          transition: color 0.15s; padding: 4px 0; background: none; border: none; cursor: pointer; font-family: inherit;
+        }
+        .nav-link:hover { color: #111827; }
+
+        .pill-btn {
+          display: inline-flex; align-items: center; gap: 7px;
+          padding: 10px 22px; border-radius: 100px; font-size: 14px; font-weight: 600;
+          transition: all 0.15s; cursor: pointer; font-family: inherit;
+        }
+        .pill-primary { background: #111827; color: #ffffff; border: 2px solid #111827; }
+        .pill-primary:hover { background: #1f2937; border-color: #1f2937; }
+        .pill-outline { background: transparent; color: #111827; border: 2px solid #e5e7eb; }
+        .pill-outline:hover { border-color: #111827; }
+
+        .filter-pill {
+          padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500;
+          border: 1.5px solid #e5e7eb; color: #6b7280; background: #ffffff;
+          cursor: pointer; font-family: inherit; transition: all 0.15s;
+        }
+        .filter-pill:hover { border-color: #111827; color: #111827; }
+        .filter-pill.on { background: #111827; color: #ffffff; border-color: #111827; }
+
+        .card {
+          background: #ffffff; border: 1.5px solid #f3f4f6;
+          border-radius: 16px; padding: 28px 28px 24px;
+          display: flex; flex-direction: column; gap: 14px;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { border-color: #e5e7eb; box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+        .card.featured { border-color: #111827; }
+
+        .tag {
+          display: inline-block; background: #f9fafb; color: #374151;
+          font-size: 11.5px; font-weight: 500; padding: 4px 10px;
+          border-radius: 6px; border: 1px solid #f3f4f6;
+        }
+
+        .cert-badge {
+          display: inline-flex; align-items: center; gap: 6px;
+          font-size: 12px; font-weight: 600; padding: 6px 14px;
+          border-radius: 100px; border: 1.5px solid #e5e7eb;
+          color: #374151; background: #f9fafb;
+        }
+
+        .repo-link {
+          font-size: 12px; font-weight: 600; color: #2563eb;
+          background: #eff6ff; border: 1px solid #dbeafe;
+          padding: 5px 12px; border-radius: 8px; transition: background 0.15s;
+        }
+        .repo-link:hover { background: #dbeafe; }
+
+        .demo-link {
+          font-size: 12px; font-weight: 600; color: #059669;
+          background: #ecfdf5; border: 1px solid #d1fae5;
+          padding: 5px 12px; border-radius: 8px; transition: background 0.15s;
+        }
+        .demo-link:hover { background: #d1fae5; }
+
+        .section-eyebrow {
+          font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+          text-transform: uppercase; color: #6b7280;
+          font-family: 'JetBrains Mono', monospace;
+        }
+
+        .skill-block {
+          background: #f9fafb; border-radius: 14px; padding: 24px;
+        }
+
+        .divider { height: 1px; background: #f3f4f6; }
+
+        @media (max-width: 700px) {
+          .hero-layout { flex-direction: column !important; }
+          .cta-row { flex-wrap: wrap !important; }
           .skills-grid { grid-template-columns: 1fr !important; }
-          .cta-row { flex-direction: column !important; align-items: flex-start !important; }
+          .projects-grid { grid-template-columns: 1fr !important; }
           .contact-inner { flex-direction: column !important; }
           .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: flex !important; }
-          .stats-col { flex-direction: row !important; flex-wrap: wrap !important; }
-          .stat-card { min-width: 120px !important; flex: 1 !important; }
+          .mobile-toggle { display: flex !important; }
+          .contact-box { padding: 36px 24px !important; }
         }
-        @media (min-width: 769px) {
-          .mobile-menu-btn { display: none !important; }
+        @media (min-width: 701px) {
+          .mobile-toggle { display: none !important; }
           .mobile-nav { display: none !important; }
         }
       `}</style>
 
       {/* NAV */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(248,249,251,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid #E4E7ED" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 500, color: "#1A56DB" }}>
+      <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, background: "rgba(255,255,255,0.92)", backdropFilter: "blur(16px)", borderBottom: "1px solid #f3f4f6" }}>
+        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 500, color: "#111827", letterSpacing: "0.02em" }}>
             amna.albasher
           </span>
-          <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            {["about", "skills", "projects", "contact"].map((s) => (
+          <nav className="desktop-nav" style={{ display: "flex", gap: 28 }}>
+            {["about", "skills", "projects", "contact"].map(s => (
               <button key={s} className="nav-link" onClick={() => scrollTo(s)}>
-                {s.charAt(0).toUpperCase() + s.slice(1)}
+                {s[0].toUpperCase() + s.slice(1)}
               </button>
             ))}
-          </div>
-          <a href="mailto:amnahashim.contact@gmail.com" className="btn-primary" style={{ fontSize: 13, padding: "8px 18px" }}>
+          </nav>
+          <a href="mailto:amnahashim.contact@gmail.com" className="pill-btn pill-primary" style={{ fontSize: 13, padding: "8px 20px" }}>
             Get in touch
           </a>
-          <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", alignItems: "center", justifyContent: "center", width: 36, height: 36, border: "1px solid #E4E7ED", borderRadius: 6, background: "#FFFFFF" }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="#0F1117" strokeWidth="1.5" strokeLinecap="round"/></svg>
+          <button className="mobile-toggle" onClick={() => setMenuOpen(!menuOpen)}
+            style={{ display: "none", alignItems: "center", justifyContent: "center", width: 38, height: 38, border: "1.5px solid #e5e7eb", borderRadius: 10, background: "#fff" }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4h12M2 8h12M2 12h12" stroke="#111827" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
           </button>
         </div>
         {menuOpen && (
-          <div className="mobile-nav" style={{ borderTop: "1px solid #E4E7ED", background: "#FFFFFF", padding: "12px 24px" }}>
-            {["about", "skills", "projects", "contact"].map((s) => (
-              <button key={s} onClick={() => scrollTo(s)} style={{ display: "block", width: "100%", textAlign: "left", padding: "10px 0", fontSize: 15, fontWeight: 500, color: "#4B5260", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
-                {s.charAt(0).toUpperCase() + s.slice(1)}
+          <div className="mobile-nav" style={{ background: "#fff", borderTop: "1px solid #f3f4f6", padding: "16px 24px 20px" }}>
+            {["about", "skills", "projects", "contact"].map(s => (
+              <button key={s} onClick={() => scrollTo(s)}
+                style={{ display: "block", width: "100%", textAlign: "left", padding: "12px 0", fontSize: 16, fontWeight: 500, color: "#374151", borderBottom: "1px solid #f9fafb", fontFamily: "inherit", background: "none", border: "none", borderBottom: "1px solid #f9fafb", cursor: "pointer" }}>
+                {s[0].toUpperCase() + s.slice(1)}
               </button>
             ))}
           </div>
         )}
-      </nav>
+      </header>
 
       {/* HERO */}
-      <section id="about" style={{ maxWidth: 1100, margin: "0 auto", padding: "120px 24px 80px" }}>
-        <div className="hero-inner" style={{ display: "flex", alignItems: "flex-start", gap: 48, flexWrap: "wrap" }}>
-          <div style={{ flex: 1, minWidth: 280 }}>
-            <p className="section-label" style={{ marginBottom: 20 }}>Cloud & DevOps Engineer</p>
-            <h1 style={{ fontSize: "clamp(36px, 5vw, 58px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 20, color: "#0F1117" }}>
-              Amna Albasher
-            </h1>
-            <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4B5260", maxWidth: 520, marginBottom: 28 }}>
-              5+ years building and managing enterprise Azure infrastructure and e-commerce platforms across the UAE — for clients including <strong style={{ color: "#0F1117" }}>Emirates Group</strong>, <strong style={{ color: "#0F1117" }}>Sharjah Co-op</strong>, and <strong style={{ color: "#0F1117" }}>Spinneys</strong>. Hands-on with Kubernetes, Terraform, CI/CD, and AI-powered cloud tooling.
-            </p>
+      <section id="about" style={{ maxWidth: 1080, margin: "0 auto", padding: "128px 24px 96px" }}>
+        <div style={{ maxWidth: 680 }}>
+          <p className="section-eyebrow" style={{ marginBottom: 24 }}>Cloud & DevOps Engineer · Dubai, UAE</p>
+          <h1 style={{ fontSize: "clamp(40px, 6vw, 68px)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 24, color: "#111827" }}>
+            Amna<br />Albasher
+          </h1>
+          <p style={{ fontSize: 18, lineHeight: 1.75, color: "#6b7280", maxWidth: 540, marginBottom: 32 }}>
+            Building enterprise Azure infrastructure, DevOps pipelines, and AI cloud tooling. AZ-104, AZ-305, and AI-900 certified with 5 years of hands-on platform engineering experience.
+          </p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 32 }}>
-              {certs.map((c) => (
-                <span key={c.code} className="badge">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 3L5 9L2 6" stroke="#1A56DB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  {c.code} · {c.name}
-                </span>
-              ))}
-            </div>
-
-            <div className="cta-row" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href="mailto:amnahashim.contact@gmail.com" className="btn-primary">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1.5 3h12l-6 5.5L1.5 3zm0 0v9h12V3" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round"/></svg>
-                Email me
-              </a>
-              <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                LinkedIn
-              </a>
-              <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                GitHub
-              </a>
-              <a href="https://drive.google.com/file/d/1ArLln7Lrnzsdyxap05zovsFEO7d-tfR0/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                Download CV
-              </a>
-            </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 36 }}>
+            {certs.map(c => (
+              <span key={c.code} className="cert-badge">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <path d="M9.5 2.5L4.5 8.5L1.5 5.5" stroke="#059669" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                {c.code} {c.name}
+              </span>
+            ))}
           </div>
 
-          <div className="stats-col" style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 200 }}>
-            {[
-              { value: "5+", label: "Years experience" },
-              { value: "10+", label: "Enterprise clients" },
-              { value: "3", label: "Azure certifications" },
-              { value: "14", label: "Public projects" },
-            ].map((s) => (
-              <div key={s.label} className="stat-card" style={{ background: "#FFFFFF", border: "1px solid #E4E7ED", borderRadius: 10, padding: "18px 22px" }}>
-                <div style={{ fontSize: 28, fontWeight: 800, color: "#0F1117", lineHeight: 1 }}>{s.value}</div>
-                <div style={{ fontSize: 13, color: "#8892A0", marginTop: 4 }}>{s.label}</div>
-              </div>
-            ))}
+          <div className="cta-row" style={{ display: "flex", gap: 12, alignItems: "center" }}>
+            <a href="mailto:amnahashim.contact@gmail.com" className="pill-btn pill-primary">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M1.5 3h12l-6 5.5L1.5 3zm0 0v9h12V3" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round"/>
+              </svg>
+              Email me
+            </a>
+            <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer" className="pill-btn pill-outline">
+              LinkedIn
+            </a>
+            <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer" className="pill-btn pill-outline">
+              GitHub
+            </a>
+            <a href="https://drive.google.com/file/d/1ArLln7Lrnzsdyxap05zovsFEO7d-tfR0/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="pill-btn pill-outline">
+              CV
+            </a>
           </div>
         </div>
       </section>
@@ -351,17 +367,15 @@ export default function Portfolio() {
       <div className="divider" />
 
       {/* SKILLS */}
-      <section id="skills" style={{ maxWidth: 1100, margin: "0 auto", padding: "72px 24px" }}>
-        <p className="section-label" style={{ marginBottom: 12 }}>Expertise</p>
-        <h2 style={{ fontSize: 30, fontWeight: 800, letterSpacing: "-0.01em", marginBottom: 36 }}>Technical Skills</h2>
-        <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
-          {skills.map((s) => (
-            <div key={s.area} className="skill-card">
-              <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 14, color: "#0F1117" }}>{s.area}</h3>
+      <section id="skills" style={{ maxWidth: 1080, margin: "0 auto", padding: "80px 24px" }}>
+        <p className="section-eyebrow" style={{ marginBottom: 16 }}>Expertise</p>
+        <h2 style={{ fontSize: 34, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 40, color: "#111827" }}>Technical Skills</h2>
+        <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 }}>
+          {skills.map(s => (
+            <div key={s.area} className="skill-block">
+              <h3 style={{ fontSize: 13, fontWeight: 700, marginBottom: 14, color: "#111827", textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.area}</h3>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {s.items.map((item) => (
-                  <span key={item} className="tag">{item}</span>
-                ))}
+                {s.items.map(item => <span key={item} className="tag">{item}</span>)}
               </div>
             </div>
           ))}
@@ -371,75 +385,70 @@ export default function Portfolio() {
       <div className="divider" />
 
       {/* PROJECTS */}
-      <section id="projects" style={{ maxWidth: 1100, margin: "0 auto", padding: "72px 24px" }}>
-        <p className="section-label" style={{ marginBottom: 12 }}>Work</p>
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 20, marginBottom: 32 }}>
-          <h2 style={{ fontSize: 30, fontWeight: 800, letterSpacing: "-0.01em" }}>Projects</h2>
+      <section id="projects" style={{ maxWidth: 1080, margin: "0 auto", padding: "80px 24px" }}>
+        <p className="section-eyebrow" style={{ marginBottom: 16 }}>Work</p>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 20, marginBottom: 40 }}>
+          <h2 style={{ fontSize: 34, fontWeight: 800, letterSpacing: "-0.02em", color: "#111827" }}>Projects</h2>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {CATEGORIES.map((c) => (
-              <button key={c} className={`filter-btn${filter === c ? " active" : ""}`} onClick={() => setFilter(c)}>
-                {c}
-              </button>
+            {CATEGORIES.map(c => (
+              <button key={c} className={`filter-pill${filter === c ? " on" : ""}`} onClick={() => setFilter(c)}>{c}</button>
             ))}
           </div>
         </div>
 
-        <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
-          {filtered.map((p) => (
-            <div key={p.id} className={`card${p.flagship ? " flagship" : ""}`}>
+        <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(310px, 1fr))", gap: 14 }}>
+          {filtered.map(p => (
+            <div key={p.id} className={`card${p.flagship ? " featured" : ""}`}>
               {p.flagship && (
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 5, fontSize: 11, fontWeight: 700, color: "#1A56DB", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace" }}>
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1l1.18 2.4L9 3.82 6.9 5.87l.49 2.84L5 7.4 2.61 8.71l.49-2.84L1 3.82l2.82-.42L5 1z" fill="#1A56DB"/></svg>
+                <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#111827", fontFamily: "'JetBrains Mono', monospace" }}>
                   Featured
-                </div>
+                </span>
               )}
               <div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4, color: "#0F1117" }}>{p.title}</h3>
-                <p style={{ fontSize: 12, fontWeight: 500, color: "#8892A0" }}>{p.subtitle}</p>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#111827", marginBottom: 3 }}>{p.title}</h3>
+                <p style={{ fontSize: 12, color: "#9ca3af", fontWeight: 500 }}>{p.subtitle}</p>
               </div>
-              <p style={{ fontSize: 13.5, lineHeight: 1.65, color: "#4B5260", flex: 1 }}>{p.description}</p>
+              <p style={{ fontSize: 13.5, lineHeight: 1.7, color: "#6b7280" }}>{p.description}</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                {p.tags.slice(0, 5).map((t) => <span key={t} className="tag">{t}</span>)}
+                {p.tags.slice(0, 5).map(t => <span key={t} className="tag">{t}</span>)}
                 {p.tags.length > 5 && <span className="tag">+{p.tags.length - 5}</span>}
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, paddingTop: 4 }}>
-                {p.repos.map((r) => (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 7, paddingTop: 2 }}>
+                {p.repos.map(r => (
                   <a key={r.label} href={r.url} target="_blank" rel="noopener noreferrer" className="repo-link">{r.label} ↗</a>
                 ))}
                 {p.demo && (
-                  <a href={p.demo} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 500, color: "#0E7A4A", border: "1px solid #E6F5EE", background: "#E6F5EE", padding: "4px 10px", borderRadius: 5 }}>
-                    Live Demo ↗
-                  </a>
+                  <a href={p.demo} target="_blank" rel="noopener noreferrer" className="demo-link">Live Demo ↗</a>
                 )}
               </div>
             </div>
           ))}
         </div>
 
-        <div style={{ textAlign: "center", marginTop: 36 }}>
-          <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: "#8892A0", fontFamily: "'JetBrains Mono', monospace" }}>
-            View all repositories → github.com/amna-albasher
-          </a>
-        </div>
+        <p style={{ textAlign: "center", marginTop: 40, fontSize: 13, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace" }}>
+          View all at github.com/amna-albasher
+        </p>
       </section>
 
       <div className="divider" />
 
       {/* CONTACT */}
-      <section id="contact" style={{ maxWidth: 1100, margin: "0 auto", padding: "72px 24px" }}>
-        <div className="contact-inner" style={{ background: "#FFFFFF", border: "1px solid #E4E7ED", borderRadius: 16, padding: "52px 48px", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 32 }}>
+      <section id="contact" style={{ maxWidth: 1080, margin: "0 auto", padding: "80px 24px 100px" }}>
+        <div className="contact-box" style={{ background: "#f9fafb", borderRadius: 20, padding: "56px 52px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 36 }}>
           <div>
-            <p className="section-label" style={{ marginBottom: 12 }}>Open to opportunities</p>
-            <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.01em", marginBottom: 12 }}>Let's work together</h2>
-            <p style={{ fontSize: 15, color: "#4B5260", maxWidth: 400, lineHeight: 1.6 }}>
-              Actively looking for Cloud/DevOps and E-Commerce roles across the UAE. Available for full-time positions.
+            <p className="section-eyebrow" style={{ marginBottom: 14 }}>Open to opportunities</p>
+            <h2 style={{ fontSize: 32, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 12, color: "#111827" }}>
+              Let's work together
+            </h2>
+            <p style={{ fontSize: 15, color: "#6b7280", maxWidth: 380, lineHeight: 1.65 }}>
+              Actively looking for Cloud, DevOps, and E-Commerce roles across the UAE. Available for full-time positions.
             </p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <a href="mailto:amnahashim.contact@gmail.com" className="btn-primary" style={{ justifyContent: "center" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <a href="mailto:amnahashim.contact@gmail.com" className="pill-btn pill-primary" style={{ justifyContent: "center" }}>
               amnahashim.contact@gmail.com
             </a>
-            <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ justifyContent: "center" }}>
+            <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer" className="pill-btn pill-outline" style={{ justifyContent: "center" }}>
               Connect on LinkedIn
             </a>
           </div>
@@ -447,8 +456,8 @@ export default function Portfolio() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid #E4E7ED", padding: "24px", textAlign: "center" }}>
-        <p style={{ fontSize: 13, color: "#8892A0", fontFamily: "'JetBrains Mono', monospace" }}>
+      <footer style={{ borderTop: "1px solid #f3f4f6", padding: "28px 24px", textAlign: "center" }}>
+        <p style={{ fontSize: 12, color: "#9ca3af", fontFamily: "'JetBrains Mono', monospace" }}>
           © {new Date().getFullYear()} Amna Albasher · Dubai, UAE
         </p>
       </footer>
