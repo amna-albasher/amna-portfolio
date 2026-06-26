@@ -1,549 +1,457 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Github, Mail, Linkedin, Cloud, ExternalLink, ChevronDown,
-  Server, Brain, Code2, Rocket, ArrowRight, Container,
-  GitBranch, Shield, Activity, MessageSquare, BarChart3,
-  Download, MapPin, BadgeCheck, Terminal, Layers
-} from 'lucide-react';
+import { useState } from "react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
-  }),
+const COLORS = {
+  bg: "#F8F9FB",
+  surface: "#FFFFFF",
+  border: "#E4E7ED",
+  borderStrong: "#C9CDD6",
+  text: "#0F1117",
+  textSecondary: "#4B5260",
+  textMuted: "#8892A0",
+  accent: "#1A56DB",
+  accentLight: "#EBF0FF",
+  accentMid: "#3B6FE8",
+  success: "#0E7A4A",
+  successLight: "#E6F5EE",
+  tag: "#F1F3F7",
+  tagText: "#3D4452",
 };
-const stagger = { visible: { transition: { staggerChildren: 0.07 } } };
 
 const projects = [
-  // ── DEVOPS ──
   {
-    title: 'AKS E-Commerce Platform',
-    description: 'Production-grade e-commerce platform on Azure Kubernetes Service with multi-container architecture, Helm charts, and full CI/CD via Azure DevOps.',
-    github: 'https://github.com/amna-albasher/ecommerce-devops-project',
-    tech: ['Kubernetes', 'AKS', 'Docker', 'Helm', 'Azure DevOps', 'CI/CD'],
-    category: 'DevOps',
-    icon: Container,
-    highlight: true,
+    id: "cloudbite",
+    title: "CloudBite",
+    subtitle: "Enterprise AKS Platform",
+    description:
+      "Multi-repo cloud-native food ordering platform built for production. Four independently managed services covering the application layer, CI/CD pipelines, Terraform infrastructure, and Helm chart deployments — with Trivy security scanning, SonarQube code quality gates, and Prometheus/Grafana monitoring baked in.",
+    tags: ["Kubernetes", "AKS", "Terraform", "ArgoCD", "Helm", "SonarQube", "Trivy", "Prometheus", "Grafana", "GitOps"],
+    category: "DevOps",
+    flagship: true,
+    repos: [
+      { label: "App", url: "https://github.com/amna-albasher/amna-hashim-tech-cloudbite-app" },
+      { label: "Pipelines", url: "https://github.com/amna-albasher/cloudbite-pipelines" },
+      { label: "Infrastructure", url: "https://github.com/amna-albasher/cloudbite-infrastructure" },
+      { label: "Helm", url: "https://github.com/amna-albasher/cloudbite-helm" },
+    ],
   },
   {
-    title: 'Terraform Secure Multi-Tier Web App',
-    description: 'Infrastructure-as-Code project provisioning a secure multi-tier Azure environment using Terraform modules, remote state, workspaces, and for_each loops.',
-    github: 'https://github.com/amna-albasher/azure-terraform-enterprise',
-    tech: ['Terraform', 'Azure', 'IaC', 'Remote State', 'Modules'],
-    category: 'DevOps',
-    icon: Shield,
+    id: "devops-health",
+    title: "DevOps Health Monitor",
+    subtitle: "Real-Time Pipeline Dashboard",
+    description:
+      "REST API and live dashboard tracking build statuses, deployment metrics, and infrastructure uptime across environments. Deployed to Vercel with a public demo.",
+    tags: ["Node.js", "REST API", "Azure", "Monitoring", "Vercel"],
+    category: "DevOps",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/devops-health-api" }],
+    demo: "https://devops-health-api-three.vercel.app",
   },
   {
-    title: 'Jenkins CI/CD Pipeline',
-    description: 'End-to-end CI/CD pipeline built with Jenkins on DigitalOcean, featuring automated build, test, and deployment stages with GitHub webhook integration.',
-    github: 'https://github.com/amna-albasher/jenkins-demo-website',
-    tech: ['Jenkins', 'CI/CD', 'DigitalOcean', 'Docker', 'GitHub Webhooks'],
-    category: 'DevOps',
-    icon: GitBranch,
+    id: "terraform-enterprise",
+    title: "Terraform Enterprise Infrastructure",
+    subtitle: "Multi-Environment Azure IaC",
+    description:
+      "Multi-environment Azure infrastructure provisioned with Terraform — separate dev, staging, and production workspaces with remote state, load balancing, VMs, and Azure Monitor integration.",
+    tags: ["Terraform", "Azure", "IaC", "Remote State", "Load Balancing", "Monitoring"],
+    category: "DevOps",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/azure-terraform-enterprise" }],
   },
   {
-    title: 'Simple CI/CD Pipeline Demo',
-    description: 'Lightweight CI/CD pipeline demonstrating GitHub Actions workflow for automated build, test, and deployment to Azure.',
-    github: 'https://github.com/amna-albasher/simple-pipeline-demo',
-    tech: ['GitHub Actions', 'CI/CD', 'Azure', 'YAML'],
-    category: 'DevOps',
-    icon: GitBranch,
+    id: "cicd-project",
+    title: "Python CI/CD Pipeline",
+    subtitle: "GitHub Actions Automation",
+    description:
+      "End-to-end CI/CD pipeline for a Python application — automated testing, linting, build, and deployment stages orchestrated through GitHub Actions with environment-specific gates.",
+    tags: ["Python", "GitHub Actions", "CI/CD", "Azure", "Testing"],
+    category: "DevOps",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/cicd-project" }],
   },
   {
-    title: 'DevOps Health Monitor API',
-    description: 'REST API for monitoring DevOps pipeline health, tracking build statuses, deployment metrics, and infrastructure uptime across environments.',
-    github: 'https://github.com/amna-albasher/devops-health-api',
-    tech: ['Node.js', 'REST API', 'Azure', 'Monitoring', 'DevOps'],
-    category: 'DevOps',
-    icon: BarChart3,
+    id: "ai-incident",
+    title: "AI Incident Response System",
+    subtitle: "Automated Alert Triage",
+    description:
+      "Azure OpenAI-powered system that classifies infrastructure alerts, suggests remediation steps, and escalates critical incidents automatically — reducing mean time to response.",
+    tags: ["Azure OpenAI", "Python", "AI Automation", "Azure Monitor", "HCL"],
+    category: "DevOps",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/ai-incident-response" }],
   },
   {
-    title: 'Microservices Demo',
-    description: 'Containerised microservices architecture demo with Docker Compose, service discovery, and inter-service communication on Azure.',
-    github: 'https://github.com/amna-albasher/microservices-demo',
-    tech: ['Docker', 'Microservices', 'Azure', 'Node.js'],
-    category: 'DevOps',
-    icon: Layers,
+    id: "ecommerce-devops",
+    title: "AKS E-Commerce Platform",
+    subtitle: "Production Kubernetes Deployment",
+    description:
+      "Production-grade e-commerce platform on Azure Kubernetes Service with multi-container architecture, Helm charts, and a full CI/CD pipeline through Azure DevOps.",
+    tags: ["Kubernetes", "AKS", "Docker", "Helm", "Azure DevOps", "CI/CD"],
+    category: "DevOps",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/ecommerce-devops-project" }],
   },
   {
-    title: 'Terraform CI Pipeline',
-    description: 'Automated Terraform CI pipeline that validates, plans, and applies infrastructure changes on Azure through GitHub Actions.',
-    github: 'https://github.com/amna-albasher/TerraformCI',
-    tech: ['Terraform', 'CI/CD', 'GitHub Actions', 'Azure', 'IaC'],
-    category: 'DevOps',
-    icon: Shield,
-  },
-  // ── AI ──
-  {
-    title: 'Smart Infrastructure Advisor',
-    description: 'AI-powered infrastructure recommendation engine built with FastAPI and the Claude API. Analyses cloud workloads and suggests optimal Azure architecture. Deployed live on Vercel.',
-    github: 'https://github.com/amna-albasher/smart-infrastructure-advisor',
-    demo: 'https://smart-infrastructure-advisor.vercel.app',
-    tech: ['FastAPI', 'Claude API', 'Python', 'Vercel', 'Azure'],
-    category: 'AI',
-    icon: Brain,
-    highlight: true,
+    id: "smart-infra",
+    title: "Smart Infrastructure Advisor",
+    subtitle: "AI-Powered Architecture Recommendations",
+    description:
+      "FastAPI application powered by the Claude API that analyses cloud workload requirements and recommends optimal Azure architecture with real-time pricing estimates. Live on Vercel.",
+    tags: ["FastAPI", "Claude API", "Python", "Vercel", "Azure", "AI"],
+    category: "AI",
+    flagship: true,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/smart-infrastructure-advisor" }],
+    demo: "https://smart-infrastructure-advisor.vercel.app",
   },
   {
-    title: 'AI Incident Response System',
-    description: 'Automated incident detection and response system using Azure OpenAI to classify alerts, suggest remediation steps, and escalate critical issues.',
-    github: 'https://github.com/amna-albasher/ai-incident-response',
-    tech: ['Azure OpenAI', 'Python', 'AI Automation', 'Azure Monitor'],
-    category: 'AI',
-    icon: Activity,
+    id: "infra-monitor",
+    title: "Azure Infrastructure Monitor",
+    subtitle: "Real-Time Cloud Health Dashboard",
+    description:
+      "Streamlit dashboard pulling live Azure Monitor metrics to surface resource health, anomaly detection alerts, and cost tracking — built with Python and the Azure SDK.",
+    tags: ["Streamlit", "Python", "Azure Monitor", "Azure SDK", "Anomaly Detection"],
+    category: "AI",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/azure-infrastructure-monitor" }],
   },
   {
-    title: 'AI Trend Predictor',
-    description: 'Machine learning tool that analyses cloud infrastructure metrics and predicts usage trends, capacity needs, and potential bottlenecks.',
-    github: 'https://github.com/amna-albasher/AI-Trend-Predictor',
-    tech: ['Python', 'Azure ML', 'Forecasting', 'Data Analysis'],
-    category: 'AI',
-    icon: BarChart3,
+    id: "ai-chatbot",
+    title: "AI Customer Support Chatbot",
+    subtitle: "Azure OpenAI + Node.js",
+    description:
+      "Context-aware customer support chatbot powered by Azure OpenAI with conversation history, intelligent escalation logic, and a Node.js REST API backend.",
+    tags: ["Azure OpenAI", "Node.js", "AI", "REST API", "JavaScript"],
+    category: "AI",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/ai-chatbot-azure" }],
   },
   {
-    title: 'AI Model Tracker – 3D Globe',
-    description: 'Interactive 3D globe visualising AI model deployments and performance metrics across global Azure regions.',
-    github: 'https://github.com/amna-albasher/ai-model-tracker',
-    tech: ['React', 'Globe.gl', 'Azure', 'Data Visualization'],
-    category: 'AI',
-    icon: Brain,
+    id: "ai-trend",
+    title: "AI Trend Predictor",
+    subtitle: "Multi-Agent Tech Forecasting",
+    description:
+      "Multi-agent system using the Claude API alongside Google Trends and job market data to predict emerging technology trends and in-demand skills across cloud and DevOps.",
+    tags: ["Claude API", "Multi-Agent", "Python", "Google Trends", "AI"],
+    category: "AI",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/AI-Trend-Predictor" }],
   },
   {
-    title: 'Real-Time Azure Infrastructure Monitor',
-    description: 'Live monitoring dashboard built with Streamlit visualising Azure resource metrics, alerts, and infrastructure health using Azure Monitor APIs.',
-    github: 'https://github.com/amna-albasher/azure-infrastructure-monitor',
-    tech: ['Streamlit', 'Python', 'Azure Monitor', 'Azure SDK'],
-    category: 'AI',
-    icon: Activity,
+    id: "az-commits",
+    title: "AZ-Commits",
+    subtitle: "AI Git Commit Generator",
+    description:
+      "CLI tool powered by Azure OpenAI that reads staged git changes and generates meaningful, conventional commit messages — cutting the time spent writing commit history.",
+    tags: ["Azure OpenAI", "Node.js", "CLI", "TypeScript", "Developer Tools"],
+    category: "AI",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/az-commits" }],
   },
   {
-    title: 'AI Customer Support Chatbot',
-    description: 'Context-aware customer support chatbot powered by Azure OpenAI with Node.js backend, conversation history, and intelligent escalation logic.',
-    github: 'https://github.com/amna-albasher/ai-chatbot-azure',
-    tech: ['Azure OpenAI', 'Node.js', 'AI', 'REST API'],
-    category: 'AI',
-    icon: MessageSquare,
+    id: "email-assistant",
+    title: "Smart Email Reply Assistant",
+    subtitle: "AI-Powered Email Drafting",
+    description:
+      "Flask application using Azure OpenAI to generate contextual email replies in seconds — trained on professional tone and format for business communication.",
+    tags: ["Azure OpenAI", "Flask", "Python", "AI Automation"],
+    category: "AI",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/smart-email-reply-assistant" }],
   },
   {
-    title: 'Smart Email Reply Assistant',
-    description: 'AI-powered email response generator using Azure OpenAI and Flask — drafts contextual replies in seconds.',
-    github: 'https://github.com/amna-albasher/smart-email-reply-assistant',
-    tech: ['Azure OpenAI', 'Flask', 'Python', 'AI Automation'],
-    category: 'AI',
-    icon: Mail,
+    id: "doc-analyzer",
+    title: "Smart Document Analyzer",
+    subtitle: "AI Document Intelligence",
+    description:
+      "AI-powered tool that extracts key information, summarises content, and answers questions from uploaded documents using Azure AI services.",
+    tags: ["Azure AI", "JavaScript", "Document Intelligence", "AI"],
+    category: "AI",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/smart-document-analyzer" }],
   },
   {
-    title: 'AZ-Commits – AI Commit Generator',
-    description: 'Azure-powered CLI tool that uses Azure OpenAI to automatically generate meaningful Git commit messages from staged changes.',
-    github: 'https://github.com/amna-albasher/az-commits',
-    tech: ['Azure OpenAI', 'Node.js', 'CLI', 'TypeScript'],
-    category: 'AI',
-    icon: GitBranch,
-  },
-  // ── CLOUD ──
-  {
-    title: 'TechGear Plus – Azure Migration',
-    description: 'Full migration of a production e-commerce store to Azure infrastructure with optimised CI/CD pipelines, load balancing, and zero-downtime deployment.',
-    github: 'https://github.com/amna-albasher/techgear-plus-azure-migration',
-    tech: ['Azure', 'DevOps', 'CI/CD', 'Load Balancing', 'eCommerce'],
-    category: 'Cloud',
-    icon: Rocket,
-  },
-  {
-    title: 'Cloud Resume – Azure',
-    description: 'Full-stack cloud resume with Azure Static Web Apps, serverless API via Azure Functions, Cosmos DB visitor counter, and GitHub Actions CI/CD.',
-    github: 'https://github.com/amna-albasher/cloud-resume-azure',
-    tech: ['Azure', 'Serverless', 'Cosmos DB', 'GitHub Actions'],
-    category: 'Cloud',
-    icon: Server,
-  },
-  {
-    title: 'Azure Networking Project',
-    description: 'Hands-on Azure networking lab covering VNets, NSGs, VNet peering, load balancers, and DNS configuration for enterprise-grade connectivity.',
-    github: 'https://github.com/amna-albasher/azure-networking-project',
-    tech: ['Azure VNet', 'NSG', 'VNet Peering', 'Load Balancer', 'DNS'],
-    category: 'Cloud',
-    icon: Server,
-  },
-  {
-    title: 'Azure Weather App',
-    description: 'Real-time weather dashboard built with React and Azure Functions, deployed on Azure Static Web Apps with live weather API integration.',
-    github: 'https://github.com/amna-albasher/azure-weather-app',
-    demo: 'https://amnaweatherstore123.z13.web.core.windows.net/',
-    tech: ['React', 'Azure Functions', 'Weather API', 'Static Web Apps'],
-    category: 'Cloud',
-    icon: Cloud,
+    id: "techgear",
+    title: "TechGear Plus Azure Migration",
+    subtitle: "Zero-Downtime Cloud Migration",
+    description:
+      "Full migration of a production e-commerce store to Azure — redesigned CI/CD pipelines, load balancing across availability zones, and a zero-downtime blue/green cutover.",
+    tags: ["Azure", "DevOps", "CI/CD", "Load Balancing", "Migration", "eCommerce"],
+    category: "Cloud",
+    flagship: false,
+    repos: [{ label: "GitHub", url: "https://github.com/amna-albasher/techgear-plus-azure-migration" }],
   },
 ];
 
+const CATEGORIES = ["All", "DevOps", "AI", "Cloud"];
+
 const skills = [
   {
-    name: 'DevOps & IaC',
-    icon: Terminal,
-    color: 'from-emerald-500/15 to-teal-500/5',
-    border: 'border-emerald-500/20',
-    items: ['Kubernetes (AKS)', 'Docker', 'Terraform', 'Jenkins', 'Helm', 'GitHub Actions', 'Azure DevOps', 'Linux'],
+    area: "DevOps & CI/CD",
+    items: ["Azure DevOps", "GitHub Actions", "Jenkins", "ArgoCD", "GitOps", "Docker", "Helm", "Trivy", "SonarQube"],
   },
   {
-    name: 'Azure Cloud',
-    icon: Cloud,
-    color: 'from-sky-500/15 to-blue-500/5',
-    border: 'border-sky-500/20',
-    items: ['AKS', 'Azure Functions', 'App Service', 'Static Web Apps', 'Cosmos DB', 'Blob Storage', 'Azure Monitor', 'Azure OpenAI'],
+    area: "Cloud & IaC",
+    items: ["Azure (AKS, Functions, App Service, Monitor, OpenAI)", "Kubernetes", "Terraform", "Remote State", "Workspaces"],
   },
   {
-    name: 'AI & Automation',
-    icon: Brain,
-    color: 'from-violet-500/15 to-purple-500/5',
-    border: 'border-violet-500/20',
-    items: ['Claude API', 'Azure OpenAI', 'FastAPI', 'Streamlit', 'Cognitive Services', 'AI Chatbots'],
+    area: "AI & Automation",
+    items: ["Azure OpenAI", "Claude API", "FastAPI", "Streamlit", "Multi-Agent Systems", "Python"],
+  },
+  {
+    area: "E-Commerce & Web Ops",
+    items: ["WooCommerce", "Shopify", "WordPress", "GA4", "GTM", "Elementor"],
   },
 ];
 
 const certs = [
-  { name: 'AZ-104', label: 'Azure Administrator', color: 'text-sky-400 border-sky-400/30 bg-sky-400/5' },
-  { name: 'AZ-305', label: 'Azure Solutions Architect', color: 'text-blue-400 border-blue-400/30 bg-blue-400/5' },
-  { name: 'AI-900', label: 'Azure AI Fundamentals', color: 'text-violet-400 border-violet-400/30 bg-violet-400/5' },
+  { code: "AZ-104", name: "Azure Administrator" },
+  { code: "AZ-305", name: "Azure Solutions Architect" },
+  { code: "AI-900", name: "Azure AI Fundamentals" },
 ];
 
-const filters = ['All', 'DevOps', 'Cloud', 'AI'];
-
 export default function Portfolio() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const filteredProjects = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter);
+  const [filter, setFilter] = useState("All");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleEmail = () => { window.location.href = 'mailto:amnahashim.contact@gmail.com'; };
-  const handleCV = () => { window.open('https://drive.google.com/file/d/1ArLln7Lrnzsdyxap05zovsFEO7d-tfR0/view?usp=drive_link', '_blank'); };
+  const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
 
   return (
-    <div className="min-h-screen bg-[#070b12] text-slate-100" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
-
+    <div style={{ background: "#F8F9FB", color: "#0F1117", fontFamily: "'Inter', system-ui, sans-serif", minHeight: "100vh" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@400;500&display=swap');
-        * { box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
+        a { color: inherit; text-decoration: none; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+        .nav-link { font-size: 14px; font-weight: 500; color: #4B5260; transition: color 0.15s; padding: 6px 0; }
+        .nav-link:hover { color: #0F1117; }
+        .filter-btn { padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 500; border: 1px solid #E4E7ED; color: #4B5260; background: #FFFFFF; transition: all 0.15s; cursor: pointer; font-family: inherit; }
+        .filter-btn:hover { border-color: #1A56DB; color: #1A56DB; }
+        .filter-btn.active { background: #1A56DB; color: #fff; border-color: #1A56DB; }
+        .card { background: #FFFFFF; border: 1px solid #E4E7ED; border-radius: 12px; padding: 28px; transition: box-shadow 0.2s, border-color 0.2s; display: flex; flex-direction: column; gap: 14px; }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-color: #C9CDD6; }
+        .card.flagship { border-color: #1A56DB; border-width: 1.5px; }
+        .tag { display: inline-block; background: #F1F3F7; color: #3D4452; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 4px; }
+        .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; border: 1px solid #E4E7ED; color: #4B5260; background: #FFFFFF; }
+        .btn-primary { display: inline-flex; align-items: center; background: #1A56DB; color: #fff; font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 8px; transition: background 0.15s; gap: 8px; }
+        .btn-primary:hover { background: #3B6FE8; }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; color: #0F1117; font-size: 14px; font-weight: 600; padding: 10px 22px; border-radius: 8px; border: 1px solid #E4E7ED; transition: border-color 0.15s; }
+        .btn-secondary:hover { border-color: #C9CDD6; }
+        .repo-link { font-size: 12px; font-weight: 500; color: #1A56DB; border: 1px solid #EBF0FF; background: #EBF0FF; padding: 4px 10px; border-radius: 5px; transition: background 0.15s; }
+        .repo-link:hover { background: #dce8ff; }
+        .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1A56DB; font-family: 'JetBrains Mono', monospace; }
+        .divider { height: 1px; background: #E4E7ED; }
+        .skill-card { background: #FFFFFF; border: 1px solid #E4E7ED; border-radius: 10px; padding: 22px 24px; }
+        @media (max-width: 768px) {
+          .hero-inner { flex-direction: column !important; }
+          .projects-grid { grid-template-columns: 1fr !important; }
+          .skills-grid { grid-template-columns: 1fr !important; }
+          .cta-row { flex-direction: column !important; align-items: flex-start !important; }
+          .contact-inner { flex-direction: column !important; }
+          .desktop-nav { display: none !important; }
+          .mobile-menu-btn { display: flex !important; }
+          .stats-col { flex-direction: row !important; flex-wrap: wrap !important; }
+          .stat-card { min-width: 120px !important; flex: 1 !important; }
+        }
+        @media (min-width: 769px) {
+          .mobile-menu-btn { display: none !important; }
+          .mobile-nav { display: none !important; }
+        }
       `}</style>
 
-      {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#070b12]/90 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-sm font-medium" style={{ fontFamily: "'DM Mono', monospace" }}>
-            <span className="text-emerald-400">amna</span><span className="text-slate-600">@cloud:~$</span>
+      {/* NAV */}
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(248,249,251,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid #E4E7ED" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: 500, color: "#1A56DB" }}>
+            amna.albasher
           </span>
-          <div className="hidden sm:flex items-center gap-8 text-sm text-slate-500">
-            {['About', 'Skills', 'Projects', 'Contact'].map(s => (
-              <a key={s} href={`#${s.toLowerCase()}`}
-                className="hover:text-white transition-colors duration-200 tracking-wide">{s}</a>
+          <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            {["about", "skills", "projects", "contact"].map((s) => (
+              <button key={s} className="nav-link" onClick={() => scrollTo(s)}>
+                {s.charAt(0).toUpperCase() + s.slice(1)}
+              </button>
             ))}
           </div>
-          <div className="flex items-center gap-4">
-            <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer"
-              className="text-slate-600 hover:text-sky-400 transition-colors duration-200">
-              <Linkedin className="h-4 w-4" />
-            </a>
-            <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
-              className="text-slate-600 hover:text-white transition-colors duration-200">
-              <Github className="h-4 w-4" />
-            </a>
-          </div>
+          <a href="mailto:amnahashim.contact@gmail.com" className="btn-primary" style={{ fontSize: 13, padding: "8px 18px" }}>
+            Get in touch
+          </a>
+          <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", alignItems: "center", justifyContent: "center", width: 36, height: 36, border: "1px solid #E4E7ED", borderRadius: 6, background: "#FFFFFF" }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="#0F1117" strokeWidth="1.5" strokeLinecap="round"/></svg>
+          </button>
         </div>
+        {menuOpen && (
+          <div className="mobile-nav" style={{ borderTop: "1px solid #E4E7ED", background: "#FFFFFF", padding: "12px 24px" }}>
+            {["about", "skills", "projects", "contact"].map((s) => (
+              <button key={s} onClick={() => scrollTo(s)} style={{ display: "block", width: "100%", textAlign: "left", padding: "10px 0", fontSize: 15, fontWeight: 500, color: "#4B5260", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+                {s.charAt(0).toUpperCase() + s.slice(1)}
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* HERO */}
-      <section id="about" className="relative min-h-screen flex items-center pt-20 pb-16">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] bg-[size:48px_48px]" />
-          <div className="absolute top-1/4 -left-48 h-[700px] w-[700px] bg-emerald-600/6 blur-[160px] rounded-full" />
-          <div className="absolute bottom-0 -right-48 h-[600px] w-[600px] bg-sky-600/6 blur-[160px] rounded-full" />
-        </div>
+      <section id="about" style={{ maxWidth: 1100, margin: "0 auto", padding: "120px 24px 80px" }}>
+        <div className="hero-inner" style={{ display: "flex", alignItems: "flex-start", gap: 48, flexWrap: "wrap" }}>
+          <div style={{ flex: 1, minWidth: 280 }}>
+            <p className="section-label" style={{ marginBottom: 20 }}>Cloud & DevOps Engineer</p>
+            <h1 style={{ fontSize: "clamp(36px, 5vw, 58px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 20, color: "#0F1117" }}>
+              Amna Albasher
+            </h1>
+            <p style={{ fontSize: 17, lineHeight: 1.7, color: "#4B5260", maxWidth: 520, marginBottom: 28 }}>
+              5+ years building and managing enterprise Azure infrastructure and e-commerce platforms across the UAE — for clients including <strong style={{ color: "#0F1117" }}>Emirates Group</strong>, <strong style={{ color: "#0F1117" }}>Sharjah Co-op</strong>, and <strong style={{ color: "#0F1117" }}>Spinneys</strong>. Hands-on with Kubernetes, Terraform, CI/CD, and AI-powered cloud tooling.
+            </p>
 
-        <div className="relative max-w-6xl mx-auto px-6 w-full">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-
-            <motion.div variants={fadeUp} custom={0} className="flex flex-wrap items-center gap-3 mb-8">
-              <span className="inline-flex items-center gap-1.5 text-xs text-slate-500">
-                <MapPin className="h-3 w-3" /> Dubai, UAE
-              </span>
-              <span className="text-slate-700">·</span>
-              <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Open to opportunities
-              </span>
-            </motion.div>
-
-            <motion.h1 variants={fadeUp} custom={1}
-              className="text-5xl sm:text-6xl lg:text-[72px] font-extrabold tracking-tight leading-[1.04] mb-5">
-              <span className="text-white">Amna Albasher</span>
-            </motion.h1>
-
-            <motion.h2 variants={fadeUp} custom={2}
-              className="text-2xl sm:text-3xl font-semibold text-slate-400 mb-6">
-              Azure Cloud & DevOps Engineer
-            </motion.h2>
-
-            <motion.p variants={fadeUp} custom={3}
-              className="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-6">
-              Cloud Solutions Lead with 5+ years managing enterprise Azure infrastructure and e-commerce platforms.
-              Hands-on with <span className="text-slate-200">Kubernetes</span>, <span className="text-slate-200">Terraform</span>, <span className="text-slate-200">CI/CD pipelines</span>, and <span className="text-slate-200">AI-powered cloud solutions</span> — delivering scalable, secure infrastructure from dev to production.
-            </motion.p>
-
-            {/* Cert badges */}
-            <motion.div variants={fadeUp} custom={4} className="flex flex-wrap gap-2 mb-10">
-              {certs.map(c => (
-                <span key={c.name}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${c.color}`}>
-                  <BadgeCheck className="h-3 w-3" /> {c.name} · {c.label}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 32 }}>
+              {certs.map((c) => (
+                <span key={c.code} className="badge">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 3L5 9L2 6" stroke="#1A56DB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  {c.code} · {c.name}
                 </span>
               ))}
-            </motion.div>
+            </div>
 
-            {/* CTA buttons */}
-            <motion.div variants={fadeUp} custom={5} className="flex flex-wrap gap-3">
-              <button onClick={handleEmail}
-                className="inline-flex items-center gap-2 bg-white text-[#070b12] hover:bg-slate-100 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 shadow-lg shadow-white/5">
-                <Mail className="h-4 w-4" /> Get In Touch <ArrowRight className="h-4 w-4" />
-              </button>
-              <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-sky-500/10 hover:bg-sky-500/18 border border-sky-500/25 text-sky-400 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200">
-                <Linkedin className="h-4 w-4" /> LinkedIn
+            <div className="cta-row" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a href="mailto:amnahashim.contact@gmail.com" className="btn-primary">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1.5 3h12l-6 5.5L1.5 3zm0 0v9h12V3" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round"/></svg>
+                Email me
               </a>
-              <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/8 border border-white/8 text-slate-300 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200">
-                <Github className="h-4 w-4" /> GitHub
+              <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                LinkedIn
               </a>
-              <button onClick={handleCV}
-                className="inline-flex items-center gap-2 bg-emerald-500/8 hover:bg-emerald-500/15 border border-emerald-500/25 text-emerald-400 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200">
-                <Download className="h-4 w-4" /> Download CV
-              </button>
-            </motion.div>
+              <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                GitHub
+              </a>
+              <a href="https://drive.google.com/file/d/1ArLln7Lrnzsdyxap05zovsFEO7d-tfR0/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                Download CV
+              </a>
+            </div>
+          </div>
 
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}>
-              <ChevronDown className="h-5 w-5 text-slate-700" />
-            </motion.div>
-          </motion.div>
+          <div className="stats-col" style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 200 }}>
+            {[
+              { value: "5+", label: "Years experience" },
+              { value: "10+", label: "Enterprise clients" },
+              { value: "3", label: "Azure certifications" },
+              { value: "14", label: "Public projects" },
+            ].map((s) => (
+              <div key={s.label} className="stat-card" style={{ background: "#FFFFFF", border: "1px solid #E4E7ED", borderRadius: 10, padding: "18px 22px" }}>
+                <div style={{ fontSize: 28, fontWeight: 800, color: "#0F1117", lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: 13, color: "#8892A0", marginTop: 4 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      <div className="divider" />
 
       {/* SKILLS */}
-      <section id="skills" className="py-24 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger}>
-
-            <motion.div variants={fadeUp} className="mb-12">
-              <p className="text-xs font-semibold tracking-[0.2em] text-emerald-400 uppercase mb-3"
-                style={{ fontFamily: "'DM Mono', monospace" }}>Expertise</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white">Technical Skills</h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {skills.map((skill, i) => {
-                const Icon = skill.icon;
-                return (
-                  <motion.div key={skill.name} variants={fadeUp} custom={i}
-                    className={`p-5 rounded-2xl bg-gradient-to-b ${skill.color} border ${skill.border} transition-all duration-300 hover:brightness-110`}>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Icon className="h-4 w-4 text-slate-400" />
-                      <h3 className="text-sm font-semibold text-white">{skill.name}</h3>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {skill.items.map(item => (
-                        <span key={item} className="text-xs px-2 py-0.5 rounded bg-black/20 text-slate-400 border border-white/5">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                );
-              })}
+      <section id="skills" style={{ maxWidth: 1100, margin: "0 auto", padding: "72px 24px" }}>
+        <p className="section-label" style={{ marginBottom: 12 }}>Expertise</p>
+        <h2 style={{ fontSize: 30, fontWeight: 800, letterSpacing: "-0.01em", marginBottom: 36 }}>Technical Skills</h2>
+        <div className="skills-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+          {skills.map((s) => (
+            <div key={s.area} className="skill-card">
+              <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 14, color: "#0F1117" }}>{s.area}</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {s.items.map((item) => (
+                  <span key={item} className="tag">{item}</span>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          ))}
         </div>
       </section>
+
+      <div className="divider" />
 
       {/* PROJECTS */}
-      <section id="projects" className="py-24 border-t border-white/5 relative">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-1/4 h-[500px] w-[500px] bg-violet-600/4 blur-[150px] rounded-full" />
+      <section id="projects" style={{ maxWidth: 1100, margin: "0 auto", padding: "72px 24px" }}>
+        <p className="section-label" style={{ marginBottom: 12 }}>Work</p>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 20, marginBottom: 32 }}>
+          <h2 style={{ fontSize: 30, fontWeight: 800, letterSpacing: "-0.01em" }}>Projects</h2>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {CATEGORIES.map((c) => (
+              <button key={c} className={`filter-btn${filter === c ? " active" : ""}`} onClick={() => setFilter(c)}>
+                {c}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger}>
+        <div className="projects-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
+          {filtered.map((p) => (
+            <div key={p.id} className={`card${p.flagship ? " flagship" : ""}`}>
+              {p.flagship && (
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 5, fontSize: 11, fontWeight: 700, color: "#1A56DB", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace" }}>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1l1.18 2.4L9 3.82 6.9 5.87l.49 2.84L5 7.4 2.61 8.71l.49-2.84L1 3.82l2.82-.42L5 1z" fill="#1A56DB"/></svg>
+                  Featured
+                </div>
+              )}
+              <div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4, color: "#0F1117" }}>{p.title}</h3>
+                <p style={{ fontSize: 12, fontWeight: 500, color: "#8892A0" }}>{p.subtitle}</p>
+              </div>
+              <p style={{ fontSize: 13.5, lineHeight: 1.65, color: "#4B5260", flex: 1 }}>{p.description}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                {p.tags.slice(0, 5).map((t) => <span key={t} className="tag">{t}</span>)}
+                {p.tags.length > 5 && <span className="tag">+{p.tags.length - 5}</span>}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, paddingTop: 4 }}>
+                {p.repos.map((r) => (
+                  <a key={r.label} href={r.url} target="_blank" rel="noopener noreferrer" className="repo-link">{r.label} ↗</a>
+                ))}
+                {p.demo && (
+                  <a href={p.demo} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 500, color: "#0E7A4A", border: "1px solid #E6F5EE", background: "#E6F5EE", padding: "4px 10px", borderRadius: 5 }}>
+                    Live Demo ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
 
-            <motion.div variants={fadeUp} className="mb-10">
-              <p className="text-xs font-semibold tracking-[0.2em] text-emerald-400 uppercase mb-3"
-                style={{ fontFamily: "'DM Mono', monospace" }}>Portfolio</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white">Featured Projects</h2>
-              <p className="mt-2 text-slate-500 text-sm max-w-lg">
-                Hands-on projects demonstrating real-world DevOps pipelines, cloud architecture, and AI solutions.
-              </p>
-            </motion.div>
-
-            {/* Filter tabs */}
-            <motion.div variants={fadeUp} className="flex gap-2 mb-10 flex-wrap">
-              {filters.map(f => (
-                <button key={f} onClick={() => setActiveFilter(f)}
-                  className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    activeFilter === f
-                      ? 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/30'
-                      : 'text-slate-500 border border-transparent hover:text-slate-300 hover:border-white/8'
-                  }`}>
-                  {f}
-                </button>
-              ))}
-            </motion.div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeFilter}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredProjects.map((project, i) => {
-                  const Icon = project.icon;
-                  return (
-                    <motion.div key={project.title}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: i * 0.04 }}
-                      whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                      className={`group relative rounded-2xl border flex flex-col transition-all duration-300 ${
-                        project.highlight
-                          ? 'border-emerald-500/22 bg-emerald-500/3 hover:border-emerald-500/40 hover:bg-emerald-500/5'
-                          : 'border-white/6 bg-white/[0.02] hover:border-white/12 hover:bg-white/[0.035]'
-                      }`}>
-
-                      {project.highlight && (
-                        <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
-                      )}
-
-                      <div className="p-5 flex flex-col flex-1">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className={`p-2 rounded-xl border ${
-                            project.highlight ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-white/4 border-white/8'
-                          }`}>
-                            <Icon className={`h-4 w-4 ${project.highlight ? 'text-emerald-400' : 'text-slate-500'}`} />
-                          </div>
-                          <div className="flex gap-1">
-                            <a href={project.github} target="_blank" rel="noopener noreferrer"
-                              className="p-1.5 rounded-lg text-slate-700 hover:text-white hover:bg-white/8 transition-all duration-200"
-                              aria-label="GitHub repo">
-                              <Github className="h-3.5 w-3.5" />
-                            </a>
-                            {project.demo && (
-                              <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                                className="p-1.5 rounded-lg text-slate-700 hover:text-white hover:bg-white/8 transition-all duration-200"
-                                aria-label="Live demo">
-                                <ExternalLink className="h-3.5 w-3.5" />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-
-                        <h3 className={`text-sm font-semibold mb-2 transition-colors duration-200 ${
-                          project.highlight ? 'text-white' : 'text-slate-200 group-hover:text-white'
-                        }`}>
-                          {project.title}
-                        </h3>
-                        <p className="text-xs text-slate-500 leading-relaxed mb-4 flex-1 line-clamp-3">
-                          {project.description}
-                        </p>
-
-                        <div className="flex flex-wrap gap-1.5 mt-auto">
-                          {project.tech.slice(0, 4).map(t => (
-                            <span key={t} className="text-xs px-2 py-0.5 rounded bg-white/4 text-slate-500 border border-white/5">
-                              {t}
-                            </span>
-                          ))}
-                          {project.tech.length > 4 && (
-                            <span className="text-xs px-2 py-0.5 rounded bg-white/4 text-slate-600 border border-white/5">
-                              +{project.tech.length - 4}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </AnimatePresence>
-
-            <motion.div variants={fadeUp} custom={6} className="mt-8 text-center">
-              <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-300 text-xs transition-colors duration-200"
-                style={{ fontFamily: "'DM Mono', monospace" }}>
-                <Github className="h-3.5 w-3.5" /> View all repositories → github.com/amna-albasher
-              </a>
-            </motion.div>
-
-          </motion.div>
+        <div style={{ textAlign: "center", marginTop: 36 }}>
+          <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: "#8892A0", fontFamily: "'JetBrains Mono', monospace" }}>
+            View all repositories → github.com/amna-albasher
+          </a>
         </div>
       </section>
 
+      <div className="divider" />
+
       {/* CONTACT */}
-      <section id="contact" className="py-24 border-t border-white/5">
-        <div className="max-w-2xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger}>
-            <motion.div variants={fadeUp}
-              className="rounded-2xl border border-white/8 bg-white/[0.02] p-10 sm:p-12 text-center">
-
-              <p className="text-xs font-semibold tracking-[0.2em] text-emerald-400 uppercase mb-4"
-                style={{ fontFamily: "'DM Mono', monospace" }}>Contact</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Open to Opportunities</h2>
-              <p className="text-slate-400 text-sm max-w-sm mx-auto mb-8 leading-relaxed">
-                Actively seeking roles in <span className="text-white">Azure Cloud Engineering</span>, <span className="text-white">DevOps</span>, and <span className="text-white">Cloud Infrastructure</span> across the UAE.
-              </p>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-3 mb-6">
-                <button onClick={handleEmail}
-                  className="inline-flex items-center justify-center gap-2 bg-white text-[#070b12] hover:bg-slate-100 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200">
-                  <Mail className="h-4 w-4" /> Email Me
-                </button>
-                <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-sky-500/10 hover:bg-sky-500/18 border border-sky-500/25 text-sky-400 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200">
-                  <Linkedin className="h-4 w-4" /> LinkedIn
-                </a>
-              </div>
-
-              <button onClick={handleCV}
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-emerald-400 text-xs transition-colors duration-200"
-                style={{ fontFamily: "'DM Mono', monospace" }}>
-                <Download className="h-3.5 w-3.5" /> Request CV by email
-              </button>
-            </motion.div>
-          </motion.div>
+      <section id="contact" style={{ maxWidth: 1100, margin: "0 auto", padding: "72px 24px" }}>
+        <div className="contact-inner" style={{ background: "#FFFFFF", border: "1px solid #E4E7ED", borderRadius: 16, padding: "52px 48px", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 32 }}>
+          <div>
+            <p className="section-label" style={{ marginBottom: 12 }}>Open to opportunities</p>
+            <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.01em", marginBottom: 12 }}>Let's work together</h2>
+            <p style={{ fontSize: 15, color: "#4B5260", maxWidth: 400, lineHeight: 1.6 }}>
+              Actively looking for Cloud/DevOps and E-Commerce roles across the UAE. Available for full-time positions.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <a href="mailto:amnahashim.contact@gmail.com" className="btn-primary" style={{ justifyContent: "center" }}>
+              amnahashim.contact@gmail.com
+            </a>
+            <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ justifyContent: "center" }}>
+              Connect on LinkedIn
+            </a>
+          </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/5 py-8">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-700" style={{ fontFamily: "'DM Mono', monospace" }}>
-            © {new Date().getFullYear()} Amna Albasher · Dubai, UAE
-          </p>
-          <div className="flex items-center gap-5">
-            <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer"
-              className="text-slate-700 hover:text-sky-400 transition-colors duration-200">
-              <Linkedin className="h-4 w-4" />
-            </a>
-            <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
-              className="text-slate-700 hover:text-white transition-colors duration-200">
-              <Github className="h-4 w-4" />
-            </a>
-            <button onClick={handleEmail} className="text-slate-700 hover:text-white transition-colors duration-200">
-              <Mail className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
+      <footer style={{ borderTop: "1px solid #E4E7ED", padding: "24px", textAlign: "center" }}>
+        <p style={{ fontSize: 13, color: "#8892A0", fontFamily: "'JetBrains Mono', monospace" }}>
+          © {new Date().getFullYear()} Amna Albasher · Dubai, UAE
+        </p>
       </footer>
-
     </div>
   );
 }
