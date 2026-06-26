@@ -21,7 +21,7 @@ const projects = [
   {
     title: 'AKS E-Commerce Platform',
     description: 'Production-grade e-commerce platform on Azure Kubernetes Service with multi-container architecture, Helm charts, and full CI/CD via Azure DevOps.',
-    github: 'https://github.com/amna-hashim-tech/ecommerce-devops-project',
+    github: 'https://github.com/amna-albasher/ecommerce-devops-project',
     tech: ['Kubernetes', 'AKS', 'Docker', 'Helm', 'Azure DevOps', 'CI/CD'],
     category: 'DevOps',
     icon: Container,
@@ -30,7 +30,7 @@ const projects = [
   {
     title: 'Terraform Secure Multi-Tier Web App',
     description: 'Infrastructure-as-Code project provisioning a secure multi-tier Azure environment using Terraform modules, remote state, workspaces, and for_each loops.',
-    github: 'https://github.com/amna-hashim-tech/azure-terraform-enterprise',
+    github: 'https://github.com/amna-albasher/azure-terraform-enterprise',
     tech: ['Terraform', 'Azure', 'IaC', 'Remote State', 'Modules'],
     category: 'DevOps',
     icon: Shield,
@@ -38,7 +38,7 @@ const projects = [
   {
     title: 'Jenkins CI/CD Pipeline',
     description: 'End-to-end CI/CD pipeline built with Jenkins on DigitalOcean, featuring automated build, test, and deployment stages with GitHub webhook integration.',
-    github: 'https://github.com/amna-hashim-tech/jenkins-demo-website',
+    github: 'https://github.com/amna-albasher/jenkins-demo-website',
     tech: ['Jenkins', 'CI/CD', 'DigitalOcean', 'Docker', 'GitHub Webhooks'],
     category: 'DevOps',
     icon: GitBranch,
@@ -46,7 +46,7 @@ const projects = [
   {
     title: 'Simple CI/CD Pipeline Demo',
     description: 'Lightweight CI/CD pipeline demonstrating GitHub Actions workflow for automated build, test, and deployment to Azure.',
-    github: 'https://github.com/amna-hashim-tech/simple-pipeline-demo',
+    github: 'https://github.com/amna-albasher/simple-pipeline-demo',
     tech: ['GitHub Actions', 'CI/CD', 'Azure', 'YAML'],
     category: 'DevOps',
     icon: GitBranch,
@@ -54,7 +54,7 @@ const projects = [
   {
     title: 'DevOps Health Monitor API',
     description: 'REST API for monitoring DevOps pipeline health, tracking build statuses, deployment metrics, and infrastructure uptime across environments.',
-    github: 'https://github.com/amna-hashim-tech/devops-health-api',
+    github: 'https://github.com/amna-albasher/devops-health-api',
     tech: ['Node.js', 'REST API', 'Azure', 'Monitoring', 'DevOps'],
     category: 'DevOps',
     icon: BarChart3,
@@ -62,7 +62,7 @@ const projects = [
   {
     title: 'Microservices Demo',
     description: 'Containerised microservices architecture demo with Docker Compose, service discovery, and inter-service communication on Azure.',
-    github: 'https://github.com/amna-hashim-tech/microservices-demo',
+    github: 'https://github.com/amna-albasher/microservices-demo',
     tech: ['Docker', 'Microservices', 'Azure', 'Node.js'],
     category: 'DevOps',
     icon: Layers,
@@ -70,7 +70,7 @@ const projects = [
   {
     title: 'Terraform CI Pipeline',
     description: 'Automated Terraform CI pipeline that validates, plans, and applies infrastructure changes on Azure through GitHub Actions.',
-    github: 'https://github.com/amna-hashim-tech/TerraformCI',
+    github: 'https://github.com/amna-albasher/TerraformCI',
     tech: ['Terraform', 'CI/CD', 'GitHub Actions', 'Azure', 'IaC'],
     category: 'DevOps',
     icon: Shield,
@@ -79,7 +79,7 @@ const projects = [
   {
     title: 'Smart Infrastructure Advisor',
     description: 'AI-powered infrastructure recommendation engine built with FastAPI and the Claude API. Analyses cloud workloads and suggests optimal Azure architecture. Deployed live on Vercel.',
-    github: 'https://github.com/amna-hashim-tech/smart-infrastructure-advisor',
+    github: 'https://github.com/amna-albasher/smart-infrastructure-advisor',
     demo: 'https://smart-infrastructure-advisor.vercel.app',
     tech: ['FastAPI', 'Claude API', 'Python', 'Vercel', 'Azure'],
     category: 'AI',
@@ -89,7 +89,7 @@ const projects = [
   {
     title: 'AI Incident Response System',
     description: 'Automated incident detection and response system using Azure OpenAI to classify alerts, suggest remediation steps, and escalate critical issues.',
-    github: 'https://github.com/amna-hashim-tech/ai-incident-response',
+    github: 'https://github.com/amna-albasher/ai-incident-response',
     tech: ['Azure OpenAI', 'Python', 'AI Automation', 'Azure Monitor'],
     category: 'AI',
     icon: Activity,
@@ -97,7 +97,7 @@ const projects = [
   {
     title: 'AI Trend Predictor',
     description: 'Machine learning tool that analyses cloud infrastructure metrics and predicts usage trends, capacity needs, and potential bottlenecks.',
-    github: 'https://github.com/amna-hashim-tech/AI-Trend-Predictor',
+    github: 'https://github.com/amna-albasher/AI-Trend-Predictor',
     tech: ['Python', 'Azure ML', 'Forecasting', 'Data Analysis'],
     category: 'AI',
     icon: BarChart3,
@@ -105,7 +105,7 @@ const projects = [
   {
     title: 'AI Model Tracker – 3D Globe',
     description: 'Interactive 3D globe visualising AI model deployments and performance metrics across global Azure regions.',
-    github: 'https://github.com/amna-hashim-tech/ai-model-tracker',
+    github: 'https://github.com/amna-albasher/ai-model-tracker',
     tech: ['React', 'Globe.gl', 'Azure', 'Data Visualization'],
     category: 'AI',
     icon: Brain,
@@ -113,7 +113,7 @@ const projects = [
   {
     title: 'Real-Time Azure Infrastructure Monitor',
     description: 'Live monitoring dashboard built with Streamlit visualising Azure resource metrics, alerts, and infrastructure health using Azure Monitor APIs.',
-    github: 'https://github.com/amna-hashim-tech/azure-infrastructure-monitor',
+    github: 'https://github.com/amna-albasher/azure-infrastructure-monitor',
     tech: ['Streamlit', 'Python', 'Azure Monitor', 'Azure SDK'],
     category: 'AI',
     icon: Activity,
@@ -121,7 +121,7 @@ const projects = [
   {
     title: 'AI Customer Support Chatbot',
     description: 'Context-aware customer support chatbot powered by Azure OpenAI with Node.js backend, conversation history, and intelligent escalation logic.',
-    github: 'https://github.com/amna-hashim-tech/ai-chatbot-azure',
+    github: 'https://github.com/amna-albasher/ai-chatbot-azure',
     tech: ['Azure OpenAI', 'Node.js', 'AI', 'REST API'],
     category: 'AI',
     icon: MessageSquare,
@@ -129,7 +129,7 @@ const projects = [
   {
     title: 'Smart Email Reply Assistant',
     description: 'AI-powered email response generator using Azure OpenAI and Flask — drafts contextual replies in seconds.',
-    github: 'https://github.com/amna-hashim-tech/smart-email-reply-assistant',
+    github: 'https://github.com/amna-albasher/smart-email-reply-assistant',
     tech: ['Azure OpenAI', 'Flask', 'Python', 'AI Automation'],
     category: 'AI',
     icon: Mail,
@@ -137,7 +137,7 @@ const projects = [
   {
     title: 'AZ-Commits – AI Commit Generator',
     description: 'Azure-powered CLI tool that uses Azure OpenAI to automatically generate meaningful Git commit messages from staged changes.',
-    github: 'https://github.com/amna-hashim-tech/az-commits',
+    github: 'https://github.com/amna-albasher/az-commits',
     tech: ['Azure OpenAI', 'Node.js', 'CLI', 'TypeScript'],
     category: 'AI',
     icon: GitBranch,
@@ -146,7 +146,7 @@ const projects = [
   {
     title: 'TechGear Plus – Azure Migration',
     description: 'Full migration of a production e-commerce store to Azure infrastructure with optimised CI/CD pipelines, load balancing, and zero-downtime deployment.',
-    github: 'https://github.com/amna-hashim-tech/techgear-plus-azure-migration',
+    github: 'https://github.com/amna-albasher/techgear-plus-azure-migration',
     tech: ['Azure', 'DevOps', 'CI/CD', 'Load Balancing', 'eCommerce'],
     category: 'Cloud',
     icon: Rocket,
@@ -154,7 +154,7 @@ const projects = [
   {
     title: 'Cloud Resume – Azure',
     description: 'Full-stack cloud resume with Azure Static Web Apps, serverless API via Azure Functions, Cosmos DB visitor counter, and GitHub Actions CI/CD.',
-    github: 'https://github.com/amna-hashim-tech/cloud-resume-azure',
+    github: 'https://github.com/amna-albasher/cloud-resume-azure',
     tech: ['Azure', 'Serverless', 'Cosmos DB', 'GitHub Actions'],
     category: 'Cloud',
     icon: Server,
@@ -162,7 +162,7 @@ const projects = [
   {
     title: 'Azure Networking Project',
     description: 'Hands-on Azure networking lab covering VNets, NSGs, VNet peering, load balancers, and DNS configuration for enterprise-grade connectivity.',
-    github: 'https://github.com/amna-hashim-tech/azure-networking-project',
+    github: 'https://github.com/amna-albasher/azure-networking-project',
     tech: ['Azure VNet', 'NSG', 'VNet Peering', 'Load Balancer', 'DNS'],
     category: 'Cloud',
     icon: Server,
@@ -170,7 +170,7 @@ const projects = [
   {
     title: 'Azure Weather App',
     description: 'Real-time weather dashboard built with React and Azure Functions, deployed on Azure Static Web Apps with live weather API integration.',
-    github: 'https://github.com/amna-hashim-tech/azure-weather-app',
+    github: 'https://github.com/amna-albasher/azure-weather-app',
     demo: 'https://amnaweatherstore123.z13.web.core.windows.net/',
     tech: ['React', 'Azure Functions', 'Weather API', 'Static Web Apps'],
     category: 'Cloud',
@@ -243,7 +243,7 @@ export default function Portfolio() {
               className="text-slate-600 hover:text-sky-400 transition-colors duration-200">
               <Linkedin className="h-4 w-4" />
             </a>
-            <a href="https://github.com/amna-hashim-tech" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
               className="text-slate-600 hover:text-white transition-colors duration-200">
               <Github className="h-4 w-4" />
             </a>
@@ -275,7 +275,7 @@ export default function Portfolio() {
 
             <motion.h1 variants={fadeUp} custom={1}
               className="text-5xl sm:text-6xl lg:text-[72px] font-extrabold tracking-tight leading-[1.04] mb-5">
-              <span className="text-white">Amna Hashim</span>
+              <span className="text-white">Amna Albasher</span>
             </motion.h1>
 
             <motion.h2 variants={fadeUp} custom={2}
@@ -309,7 +309,7 @@ export default function Portfolio() {
                 className="inline-flex items-center gap-2 bg-sky-500/10 hover:bg-sky-500/18 border border-sky-500/25 text-sky-400 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200">
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
-              <a href="https://github.com/amna-hashim-tech" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/8 border border-white/8 text-slate-300 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200">
                 <Github className="h-4 w-4" /> GitHub
               </a>
@@ -476,10 +476,10 @@ export default function Portfolio() {
             </AnimatePresence>
 
             <motion.div variants={fadeUp} custom={6} className="mt-8 text-center">
-              <a href="https://github.com/amna-hashim-tech" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-300 text-xs transition-colors duration-200"
                 style={{ fontFamily: "'DM Mono', monospace" }}>
-                <Github className="h-3.5 w-3.5" /> View all repositories → github.com/amna-hashim-tech
+                <Github className="h-3.5 w-3.5" /> View all repositories → github.com/amna-albasher
               </a>
             </motion.div>
 
@@ -526,14 +526,14 @@ export default function Portfolio() {
       <footer className="border-t border-white/5 py-8">
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-700" style={{ fontFamily: "'DM Mono', monospace" }}>
-            © {new Date().getFullYear()} Amna Hashim · Dubai, UAE
+            © {new Date().getFullYear()} Amna Albasher · Dubai, UAE
           </p>
           <div className="flex items-center gap-5">
             <a href="https://linkedin.com/in/amna-albasher-5139181aa" target="_blank" rel="noopener noreferrer"
               className="text-slate-700 hover:text-sky-400 transition-colors duration-200">
               <Linkedin className="h-4 w-4" />
             </a>
-            <a href="https://github.com/amna-hashim-tech" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/amna-albasher" target="_blank" rel="noopener noreferrer"
               className="text-slate-700 hover:text-white transition-colors duration-200">
               <Github className="h-4 w-4" />
             </a>
